@@ -269,7 +269,7 @@ main .main__about .wrapper {
 }
 
 .contact__form {
-	padding: 100px 0 100px 0;
+	padding: 100px 0 60px 0;
 }
 
 .contact__form h1,p {
@@ -336,6 +336,20 @@ input[type="submit"] {
 	font-weight: 600;
 }
 
+.top__button {
+	width: 90px;
+	background: #999999;
+	opacity: 0.4;
+	padding: 10px;
+	margin-right: 10px;
+	display: flex;
+	align-self: end;
+}
+
+.top__button a {
+	color: #000;
+}
+
 h1:after {
 	content: "";
 	display: block;
@@ -364,6 +378,7 @@ footer {
 .social img:hover {
 	opacity: 0.6;
 }
+
 
 @media screen and (max-width: 1300px) {
 	nav{
