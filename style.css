@@ -100,7 +100,8 @@ body {
   padding: 0;
 }
 
-.skills-list dt {
+.skills-list dt,
+.other-skills {
   padding-left: 32px;
   background-repeat: no-repeat;
   background-position: left;
@@ -112,6 +113,14 @@ body {
 
 .skill-css {
   background-image: url("img/icon-css.svg");
+}
+
+.skill-js {
+  background-image: url("img/icon-javascript.svg");
+}
+
+.other-skills {
+  background-image: url("img/icon-checkmark.svg");
 }
 
 .level {
@@ -135,23 +144,9 @@ body {
   margin: 0 0 120px;
 }
 
-.projects {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.projects li {
-  margin: 0 0 80px;
-}
-
 .project-image {
   margin: 0 0 24px;
   text-align: center;
-}
-
-.projects p {
-  margin: 0 0 24px;
 }
 
 .button {
@@ -163,6 +158,7 @@ body {
   border-radius: 4px;
   background-color: #712073;
   color: #ffffff;
+  margin-bottom: 45px;
 }
 
 .page-footer {
