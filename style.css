@@ -92,7 +92,7 @@ body {
 }
 
 .intro p {
-  margin: 0 0 32px;
+  margin: 20px 0 18px;
 }
 
 .skills-list {
@@ -158,7 +158,7 @@ body {
   border-radius: 4px;
   background-color: #712073;
   color: #ffffff;
-  margin-bottom: 45px;
+  margin-bottom: 85px;
 }
 
 .page-footer {
