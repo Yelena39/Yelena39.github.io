@@ -1,2 +1,1 @@
-# my-site
-# Stepic
+# Please go to https://yelena39.github.io to see the portfolio
