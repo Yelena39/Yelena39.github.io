@@ -9,8 +9,173 @@
 
   <body>
     <header class="page-header">
-      <div class="container">
-        <h3>Sorry, this page is currently under construction...</h3>
+      <div name="top" class="container">
+        <h3>Automated tests code samples</h3>
       </div>
+    </header>
+
+    <main>
+      <section class="main__contents">
+        <ul class="contents">
+          <li><a class="link" href="#footer_test">Overlaying footer test</a></li>
+          <li><a class="link" href="#booking_test">Specific price booking test</a></li>
+        </ul>
+      </section>
+
+      
+      <section class="main__tests">
+        <div class="main_test">
+          <a name="footer_test"></a>
+          <h2>Overlaying footer test</h2>
+          <p>The goal is getting the pass code from the final alert on the sample page <a class="link" href= "https://SunInJuly.github.io/execute_script.html">SunInJuly</a>.
+          </p>
+          <p>In order to do that we need to:
+            <ul>
+              <li>get the "x" value from html code of the page (it's unique every time the page is loaded)</li>
+              <li>do the calculations</li>
+              <li>enter the result into the answer field</li>
+              <li>check the "I'm the robot" checkbox</li>
+              <li>select "Robots rule" radio button</li>
+              <li>hit "Submit" to see the alert.</li>
+            </ul>
+          All that has to happen within 2 seconds. </p>
+          <p>If everything was done correctly, the alert will show the "Congrats, you've passed the task!" message and the pass code.
+          </p>
+          <p>The main issue is that this page footer overlays cetrain part of the screen and we need to make sure the test works fine at any height screen.
+          </p>
+
+          <h1>Solution</h1>
+          <pre><code class="code">
+      from selenium import webdriver
+      from selenium.webdriver.common.by import By
+      from selenium.webdriver.support.ui import Select
+      import time
+      import math 
+
+      def calc(x):
+        return str(math.log(abs(12*math.sin(int(x)))))
+
+      link = "https://SunInJuly.github.io/execute_script.html"
+
+      try:
+        browser = webdriver.Chrome()
+        browser.get(link)
+
+        x = browser.find_element(By.ID, "input_value").text
+        y = calc(x)
+
+        # getting values for calculations
+        input1 = browser.find_element(By.CSS_SELECTOR, "#answer")
+        input1.send_keys(y)
+
+        # selecting the checkbox and the radio button
+        option1 = browser.find_element(By.CSS_SELECTOR, "#robotCheckbox")
+        option1.click()
+
+        option2 = browser.find_element(By.CSS_SELECTOR, "[value='robots']")
+        option2.click()
+
+        # hiding footer which doesn't let to get to the "Submit" button
+        footer = browser.find_element(By.TAG_NAME, "footer")
+        browser.execute_script('arguments[0].style.visibility = \'hidden\'', footer)
+
+        button = browser.find_element(By.XPATH, '//button[text() = "Submit"]')
+        button.click()
+
+        # getting the pass code from the alert and printing it into console
+        alert = browser.switch_to.alert
+        print(alert.text.split(': ')[-1])
+
+      # this will throw an exception if the screen size is less than 1600px height  
+      except:
+        print("Ooops, seems like your screen is too small...")
+
+      finally:
+        time.sleep(10)
+        browser.quit()
+          </code></pre>
+
+          <p>You can download this code sample <a class="link" href="https://yelena39.github.io/AutomatedTestsCode/CodeSamples/WrongFooter.py">here</a></p>
+          <a class="link" href="#top">Go to top</a>
+      </div>
+
+      <div class="main__test">
+        <a name="booking_test"></a>
+        <h2>Specific price booking test</h2>
+        <p>The goal is getting the pass code from the final alert on the sample page <a class="link" href= "http://suninjuly.github.io/explicit_wait2.html">SunInJuly_1</a>.
+        </p>
+        <p>In order to do that we need to:
+          <ul>
+            <li>hit the "Book" button exactly when the price is $100 (which dynamically changes all the time)</li>
+            <li>get the "x" value from html code of the page (it's unique every time)</li>
+            <li>do the calculations</li>
+            <li>enter the result into the answer field</li>
+            <li>hit "Submit" to see the alert</li>
+          </ul>
+
+        There is a time limit of 2 seconds after the "Book" button is hit. </p>
+        <p>If everything was done correctly, the alert will show the "Congrats, you've passed the task!" message and the pass code.
+        </p>
+          
+        <h1>Solution</h1>
+        <pre><code class="code">
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium import webdriver
+    import math
+    import time
+
+    def calc(x):
+      return str(math.log(abs(12*math.sin(int(x)))))
+
+    try:
+      browser = webdriver.Chrome()
+      browser.get("http://suninjuly.github.io/explicit_wait2.html")
+
+      # Selenium is checking for 12 seconds if the price of the booking is $100
+      WebDriverWait(browser, 12).until(
+        EC.text_to_be_present_in_element((By.ID, "price"), "$100")
+      )
+
+      button = browser.find_element(By.ID, "book")
+      button.click()            
+
+      # getting values for calculations
+      x = browser.find_element(By.ID, "input_value").text
+      y = calc(x)
+
+      # scrolling into view to enter the answer
+      browser.execute_script("window.scrollBy(0, 100);")
+
+      input1 = browser.find_element(By.CSS_SELECTOR, "#answer")
+      input1.send_keys(y)
+
+      button1 = browser.find_element(By.XPATH, '//button[text() = "Submit"]')
+      button1.click()
+
+      # checking if the alert has certain message otherwise indicating that the test has failed
+      alert = browser.switch_to.alert
+      assert "Congrats, you've passed the task!" in alert.text, "Test has failed"
+                
+      # getting the pass code from the alert and printing it into console
+      print(alert.text.split(': ')[-1])
+
+      time.sleep(7)
+      alert.accept()
+
+    finally:
+      time.sleep(10)
+      browser.quit()
+        </code></pre>
+
+        <p>You can download this code sample <a class="link" href="https://yelena39.github.io/AutomatedTestsCode/CodeSamples/BookingTest.py">here</a></p>
+        <a class="link" href="#top">Go to top</a>
+      </div>
+    
+    </section>
+
+
+    </main>
   </body>
   </html> 
