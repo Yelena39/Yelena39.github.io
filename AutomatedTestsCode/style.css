@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  /*min-width: 960px;*/
   font-family: "Montserrat", "Helvetica", "Arial", sans-serif;
   font-size: 15px;
   line-height: 32px;
@@ -30,6 +29,7 @@ main {
 }
 
 .main__contents {
+  max-width: 300px;
   font-size: 17px;
 }
 
@@ -45,12 +45,24 @@ main {
 
 .main__tests {
   display: flex;
-  flex-flow:  column wrap;
+  flex-flow: column wrap;
+}
+
+.main__test {
+  max-width: 928px;
+  margin: 0 10px 20px 10px;
+}
+
+.main__test h2 {
+  font-size: 20px;
+}
+
+.main__test h1 {
+  font-size: 18px;
 }
 
 .code {
   color: #808080;
-  font-size: 15px;
   white-space: break-spaces;
 }
 
@@ -62,24 +74,24 @@ main {
   color: #FF8000;
 }
 
-@media screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
   body {
-    font-size: 16px;
+    font-size: 14px;
+  }
+
+  .container h3 {
+    font-size: 21px;
   }
 
   .main__contents {
-    font-size: 17px;
+    font-size: 16px;
   }
 
-  h3 {
-    font-size: 19px;
-  }
-
-  h2, h1 {
+  .main__test h2 {
     font-size: 18px;
   }
 
-  .code {
-    font-size: 16px;
+  .main__test h1 {
+    font-size: 17px;
   }
 }
