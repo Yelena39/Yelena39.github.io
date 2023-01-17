@@ -9,8 +9,339 @@
 
   <body>
     <header class="page-header">
-      <div class="container">
-        <h3>Sorry, this page is currently under construction...</h3>
+      <div name="top" class="container">
+        <h3>Test cases samples</h3>
       </div>
+    </header>
+
+    <main>
+      <section class="main__contents">
+        <ul class="contents">
+          <li><a class="link" href="#frontend_test">Frontend test case</a></li>
+          <li><a class="link" href="#backend_test">Backend test case</a></li>
+          <li><a class="link" href="#integration_test">Integration test case</a></li>
+        </ul>
+      </section>
+
+      
+      <section class="main__tests">
+        <div class="main__test">
+          <a name="frontend_test"></a>
+          <h2>Frontend test case</h2>
+          <p>Here are several examples of frontend test cases designed using different testing design techniques while testing the sample <a class="link" href= "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/">online store</a> Registration form.
+          </p>
+          <details>
+            <summary class="italic">1. Standard Use Case technique
+            </summary>
+            <p><pre class="solution">
+Preconditions:
+    Access to the database where registered users are stored
+
+Execution:
+    Step 1. Go to http://selenium1py.pythonanywhere.com/en-gb/accounts/login/
+    Expected result: Log In/Register page is open
+
+    Step 2. Clear the website cache in Devtools console and refresh the page
+    Expected result: cache is cleared
+
+    Step 3. Enter valid unique e-mail address into the "Email address" field of the Register form
+    Expected result: Entered e-mail address is shown in the "Email address" field
+
+    Step 4. Enter 9 digit password (letters or symbols should be included) into the "Password" field of the Register form
+    Expected result: Entered password is hidden behind asterisk symbols in the "Password" field
+
+    Step 5. Repeat 9 digit password in the "Confirm password" field of the Register form
+    Expected result: Entered password is hidden behind asterisk symbols in the "Confirm password" field
+
+    Step 6. Hit the "Register" button
+    Expected result:  1) Homepage is open
+                      2) "Thanks for registering" green banner is being shown above the "Welcome" block
+                      3) In the top right corner "Account" and "Logout" options are available (user is authorized)
+
+    Step 7. Click the "Account" option in the top right corner of the Homepage
+    Expected result:  1) Profile page is open and "Profile" menu tab is active on the left
+                      2) Email address from step 3 is shown in the "Email address" block
+                      3) Date and time of the registration in the "Date registered" block are correct
+
+    Step 8. Check if the email address from step 3 is stored in the database table with registered users
+    Expected result: New user is successfully stored in database with the email address from step 3
+  
+Postconditions:
+    Delete recently registered user from the database
+            </pre></p>
+          </details>
+
+          <details>
+            <summary class="italic">2. Negative test case ("Email address" field testing)
+            </summary>
+            <p><pre class="solution">
+Preconditions:
+    Access to the database where registered users are stored
+
+Execution:
+    Step 1. Go to http://selenium1py.pythonanywhere.com/en-gb/accounts/login/
+    Expected result: Log In/Register page is open
+
+    Step 2. Clear the website cache in Devtools console and refresh the page
+    Expected result: cache is cleared
+
+    Step 3. Enter several letters into the "Email address" field of the Register form
+    Expected result: Entered letters are shown in the "Email address" field
+
+    Step 4. Hit the "Register" button
+    Expected result: 1) "Please include an '@' in the email address. '[letters from step 3]' is missing an '@'." tooltip shows under the "Email address" field 
+                     2) No requests are sent in the Devtools console
+
+    Step 5. Add "@" after the letters in the "Email address" field of the Register form
+    Expected result: Entered letters and "@" are shown in the "Email address" field
+
+    Step 6. Hit the "Register" button
+    Expected result:  1) "Please enter a part following '@' in the email address. '[letters from step 3]@' is incomplete." tooltip shows under the "Email address" field 
+                      2) No requests are sent in the Devtools console
+
+    Step 7. Add several more letters after "@" in the "Email address" field of the Register form
+    Expected result: Entered letters and "@" are shown in the "Email address" field
+
+    Step 8. Hit the "Register" button
+    Expected result:  1) "Please fill in this field." tooltip shows under the "Password" field 
+                      2) No requests are sent in the Devtools console
+  
+Postconditions:
+    Delete recently registered user data from the database if registration was a success
+            </pre></p>
+          </details>
+
+          <details>
+            <summary class="italic">3. Error guessing (empty fields testing)
+            </summary>
+            <p><pre class="solution">
+Preconditions:
+    Access to the database where registered users are stored
+
+Execution:
+    Step 1. Go to http://selenium1py.pythonanywhere.com/en-gb/accounts/login/
+    Expected result: Log In/Register page is open
+
+    Step 2. Clear the website cache in Devtools console and refresh the page
+    Expected result: cache is cleared
+
+    Step 3. Hit the "Register" button in the Register form leaving all the fields empty
+    Expected result:  1) "Please fill in this field." tooltip shows under the "Email address" field 
+                      2) No requests are sent in the Devtools console
+  
+Postconditions:
+    Delete recently registered user data from the database if registration was a success
+            </pre></p>
+          </details>
+
+          <details>
+            <summary class="italic">4. Equivalent class partitioning and boundary value analysis ("Password" field validation testing)
+            </summary>
+            <p>Password for this online store account has to be at least 9 characters, which means that there are 2 password length partitions - less than and more than 9 characters, and a boundary value of 9 password length characters to be tested.</p>
+            <p><pre class="solution">
+Preconditions:
+    Access to the database where registered users are stored
+
+Execution:
+    Step 1. Go to http://selenium1py.pythonanywhere.com/en-gb/accounts/login/
+    Expected result: Log In/Register page is open
+
+    Step 2. Clear the website cache in Devtools console and refresh the page
+    Expected result: cache is cleared
+
+    Step 3. Enter valid e-mail address into the "Email address" field of the Register form
+    Expected result: Entered e-mail address is shown in the "Email address" field
+
+    Step 4. Enter 8 digit password(letters or symbols should be included) into the "Password" field of the Register form
+    Expected result: Entered password is hidden behind asterisk symbols in the "Password" field
+
+    Step 5. Repeat 8 digit password in the "Confirm password" field of the Register form
+    Expected result: Entered password is hidden behind asterisk symbols in the "Confirm password" field
+
+    Step 6. Hit the "Register" button
+    Expected result:  1) "Oops! We found some errors - please check the error messages below and try again" red banner is being shown under the "Register" header of the Register form
+                      2) The "Email address" field shows e-mail address from step 3, "Password" and "Confirm password" fields are empty
+                      3) The "Confirm password" field has a red border and "Confirm password" text label is also red
+                      4) "This password is too short. It must contain at least 9 characters." red text tooltip is being shown under the "Confirm password" field
+
+    Step 7. Enter 9 digit password(letters or symbols should be included) into the "Password" field of the Register form
+    Expected result: Entered password is hidden behind asterisk symbols in the "Password" field
+
+    Step 8. Repeat 9 digit password in the "Confirm password" field of the Register form
+    Expected result: Entered password is hidden behind asterisk symbols in the "Confirm password" field
+
+    Step 9. Hit the "Register" button
+    Expected result:  1) Homepage is open
+                      2) "Thanks for registering" green banner is being shown above the "Welcome" block
+                      3) In the top right corner "Account" and "Logout" options are available (user is authorized)
+
+    Step 10. Click the "Account" option in the top right corner of the Homepage
+    Expected result:  1) Profile page is open and "Profile" menu tab is active on the left
+                      2) Email address from step 3 is shown in the "Email address" block
+                      3) Date and time of the registration in the "Date registered" block are correct
+
+    Step 11. Check if the email address from step 3 is stored in the database table with registered users
+    Expected result: New user is successfully stored in database with the email address from step 3
+
+    Step 12. Clear the website cache in Devtools console and refresh the page
+    Expected result: cache is cleared
+
+    Step 13. Go to http://selenium1py.pythonanywhere.com/en-gb/accounts/login/
+    Expected result: Log In/Register page is open
+
+    Step 14. Enter new valid e-mail address into the "Email address" field of the Register form
+    Expected result: Entered e-mail address is shown in the "Email address" field
+
+    Step 15. Enter 10 digit password(letters or symbols should be included) into the "Password" field of the Register form
+    Expected result: Entered password is hidden behind asterisk symbols in the "Password" field
+
+    Step 16. Repeat 10 digit password in the "Confirm password" field of the Register form
+    Expected result: Entered password is hidden behind asterisk symbols in the "Confirm password" field
+
+    Step 17. Hit the "Register" button
+    Expected result:  1) Homepage is open
+                      2) "Thanks for registering" green banner is being shown above the "Welcome" block
+                      3) In the top right corner "Account" and "Logout" options are available (user is authorized)
+
+    Step 18. Click the "Account" option in the top right corner of the Homepage
+    Expected result:  1) Profile page is open and "Profile" menu tab is active on the left
+                      2) Email address from step 14 is shown in the "Email address" block
+                      3) Date and time of the registration in the "Date registered" block are correct
+
+    Step 19. Check if the email address from step 14 is stored in the database table with registered users
+    Expected result: New user is successfully stored in database with the email address from step 3
+
+    Click the "Account" option in the top right corner of the Homepage
+    Expected result:  1) Profile page is open and "Profile" menu tab is active on the left
+                      2) Email address from step 14 is shown in the "Email address" block
+                      3) Date and time of the registration in the "Date registered" block are correct
+
+    Step 20. Check if the email address from step 14 is stored in the database table with registered users
+    Expected result: New user is successfully stored in database with the email address from step 3
+  
+Postconditions:
+    Delete recently registered users from the database
+
+            </pre></p>
+          </details>
+
+          
+        <a class="link" href="#top">Go to top</a>
+        </div>
+
+        <div class="main__test">
+          <a name="backend_test"></a>
+          <h2>Backend test case</h2>
+          <p>Here is rough sample of backend test case when some specific data retrieval is being tested.</p>
+          <p><pre class="solution">
+  Preconditions:
+      Set up Postman environment with consecutive credentials.
+
+  Execution steps:
+      1) Send GET request at https://... with the following query params, headers and body.
+        Query params:
+            Key "date", value "2022-12-09T00:00:16.388Z"
+        Headers:
+            User-Agent: PostmanRuntime/7.29.0
+            Accept: */*
+            Accept-Encoding: gzip, deflate, br
+            Connection: keep-alive
+        Body:
+            empty
+
+  Expected result:
+      1) Response is:
+        Status Code: 200
+        Headers:
+            User-Agent: PostmanRuntime/7.29.0
+            Accept: */*
+            Accept-Encoding: gzip, deflate, br
+            Connection: keep-alive
+            Content-type: application/json
+        Body:
+            {
+              "errors": [],
+              "data": [
+              {
+                "clientId": 12345,
+                "clientName": "Jack Tompson",
+                "applicationsNumber": 3
+
+                ...
+
+              }
+              ]
+            }
+      2) Response time is under 500 ms
+          </pre></p>
+          <a class="link" href="#top">Go to top</a>
+        </div>
+
+        <div class="main__test">
+          <a name="integration_test"></a>
+          <h2>Integration test case</h2>
+          <p>If the project architecture is complex and a lot of microservises are involved, it's important to track the request all the way from user initiation input to the final system and also track the response all the way back to the user during integration testing.
+          </p>
+          <p>Also, within one big system, some parts might have been developed a long time ago and currently are just being supported, and other parts might be fresh and up-to-date, therefore special adapter services might be needed to provide proper data exchange. In this case, it's essential to test request/response mapping for all the keys while the data is being transferred from one service to another.
+          </p>
+          <p>Here is rough sample of integration test case when user submits some application through a web interface.</p>
+
+          <p><pre class="solution">
+  Preconditions:
+      Valid user account.
+      Access to logs.
+      Access to database.
+
+  Execution steps:
+      Step 1. Go to http://... and authorize  
+      Expected result: Authorization is successfull
+
+      Step 2. Go to "Applications" menu and "Submit new application" tab 
+      Expected result: "Submit new application" page is open
+
+      Step 3. Fill in all the fields of the application form and hit "Submit" - take screenshot of all the data entered and the time of submitting
+      Expected result: "Your application is currently being processed" page is open (UI)
+
+      Step 4. Access the logs system and find the corresponding request in the Requestor service using the time of submitting from step 3, copy its id
+      Expected result: The corresponding request is located (UI -> Requestor)
+
+      Step 5. Check if the corresponding request body has all the data from the application form at step 3, and all the keys comply with documentation
+      Expected result: The request is correct
+
+      Step 6. Filter out the logs by the request id to track all the services called afterwards, and check if the next technical adapter service was called.
+      Expected result: Correct technical adapter service was called (Requestor -> Adapter)
+
+      Step 7. Check if the corresponding request from Requestor to Adapter has all the needed data, it's correct, and all the keys comply with documentation
+      Expected result: The request data is correct
+
+      Step 8. Check if the technical adapter service sends request to a destination service.
+      Expected result: Correct destination service was called (Adapter -> Destination service)
+
+      Step 9. Check if the corresponding request from Adapter to destination service was properly mapped, has all the needed data, which is correct, and all the keys comply with documentation
+      Expected result: The request data is correct
+
+      Step 10. Check the response of destination service.
+      Expected result: The response has the correct message about application submitting success. (Destination service -> Adapter)
+
+      Step 11. Find corresponding submitted application data in the database.
+      Expected result: The application data is recorded in database, all of the sent in step 3 application data is present and correct.
+
+      Step 12. Check if the response of destination service was mapped by Adapter and sent back to the Requestor service.
+      Expected result: The response was correctly mapped and sent to the Requestor. (Adapter -> Requestor)
+
+      Step 13. Check if the response of destination service was sent from the Requestor service to UI.
+      Expected result: The response was sent to UI. (Requestor -> UI)
+
+      Step 14. Check the status of application in user interface.
+      Expected result: The status of application is now "Your application has been successfully submitted" (UI)
+     
+          </pre></p>
+
+
+
+        <a class="link" href="#top">Go to top</a>
+        </div>
+
+      </section>
   </body>
   </html> 

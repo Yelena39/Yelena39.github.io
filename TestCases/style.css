@@ -1,27 +1,97 @@
 body {
   margin: 0;
-  min-width: 960px;
   font-family: "Montserrat", "Helvetica", "Arial", sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 32px;
   color: #f2f2f2;
   background-color: #080208;
-  background-image: url("img/hero-bg.jpg");
-  background-repeat: no-repeat;
-  background-position: top center;
 }
 
 .container {
   max-width: 928px;
-  margin: 20% auto;
+  margin: 40px auto;
   padding: 0 16px;
   text-align: center;
 }
 
 .container h3 {
-  margin: 30px 0 12px;
+  margin: 20px 0 12px;
   font-size: 28px;
-  line-height: 40px;
+  line-height: 30px;
   font-weight: 500;
   color: #808080;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.main__contents {
+  max-width: 300px;
+  font-size: 17px;
+}
+
+.contents {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 45%;
+}
+
+.main__contents a {
+  text-decoration: none;
+}
+
+.main__tests {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.main__test {
+  max-width: 928px;
+  margin: 0 10px 20px 10px;
+}
+
+.main__test h2 {
+  font-size: 20px;
+}
+
+.main__test h1 {
+  font-size: 18px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.solution {
+  color: #808080;
+  white-space: break-spaces;
+}
+
+.link {
+  color: #FFFF00;
+}
+
+.link:visited {
+  color: #FF8000;
+}
+
+@media only screen and (max-width: 700px) {
+  body {
+    font-size: 14px;
+  }
+
+  .main__contents {
+    font-size: 16px;
+  }
+
+  .main__test h2 {
+    font-size: 18px;
+  }
+
+  .main__test h1 {
+    font-size: 17px;
+  }
 }
